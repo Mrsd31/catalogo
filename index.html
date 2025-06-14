@@ -161,6 +161,19 @@
       height: 30px;
       cursor: pointer;
     }
+    .multi-file-input {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .file-input-container {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .file-input-container input[type="text"] {
+      flex: 1;
+    }
   </style>
 </head>
 <body>
@@ -182,13 +195,17 @@
       </div>
     </div>
 
-    <div class="produto-form">
-      <input type="file" accept="image/*" id="imagem-produto" />
-      <input type="text" placeholder="Nome do Produto" id="nome-produto" />
-      <input type="text" placeholder="Preço" id="preco-produto" />
-      <button onclick="adicionarProduto()">Adicionar Produto</button>
+    <div class="multi-file-input">
+      <div class="produto-form">
+        <input type="file" accept="image/*" id="imagem-produto" multiple />
+        <input type="text" placeholder="Nome do Produto" id="nome-produto" />
+        <input type="text" placeholder="Preço" id="preco-produto" />
+        <button onclick="adicionarProduto()">Adicionar Produto</button>
+      </div>
+      <div id="multi-files-container"></div>
     </div>
     <button onclick="gerarImagem()">Baixar Catálogo (PNG)</button>
+    <button onclick="limparCatalogo()">Limpar Catálogo</button>
   </div>
 
   <div class="catalogo">
@@ -214,6 +231,7 @@
     const textoPeriodo = document.getElementById("texto-periodo");
     const areaCatalogo = document.getElementById("area-catalogo");
     const corFundoInput = document.getElementById("cor-fundo");
+    const multiFilesContainer = document.getElementById("multi-files-container");
 
     // Atualiza a cor de fundo do catálogo
     corFundoInput.addEventListener("input", function() {
@@ -252,18 +270,28 @@
         return;
       }
 
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        const produto = document.createElement("div");
-        produto.className = "produto";
-        produto.innerHTML = `
-          <img src="${e.target.result}" alt="${nome}" />
-          <h3>${nome}</h3>
-          <div class="preco">R$ ${preco}</div>
-        `;
-        listaProdutos.appendChild(produto);
-      };
-      reader.readAsDataURL(fileInput.files[0]);
+      // Processa múltiplas imagens
+      const files = Array.from(fileInput.files);
+      
+      files.forEach((file, index) => {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          const produto = document.createElement("div");
+          produto.className = "produto";
+          
+          // Se houver apenas uma imagem ou for a primeira, usa o nome e preço originais
+          // Para imagens adicionais, adiciona um número ao nome
+          const produtoNome = files.length === 1 ? nome : `${nome} ${index + 1}`;
+          
+          produto.innerHTML = `
+            <img src="${e.target.result}" alt="${produtoNome}" />
+            <h3>${produtoNome}</h3>
+            <div class="preco">R$ ${preco}</div>
+          `;
+          listaProdutos.appendChild(produto);
+        };
+        reader.readAsDataURL(file);
+      });
 
       // Limpa campos
       fileInput.value = "";
@@ -286,6 +314,11 @@
         console.error("Erro ao gerar catálogo:", err);
         alert("Erro ao baixar. Tente novamente!");
       });
+    }
+
+    // Limpa todo o catálogo
+    function limparCatalogo() {
+      listaProdutos.innerHTML = '';
     }
   </script>
 </body>
