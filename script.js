@@ -286,3 +286,98 @@ document.addEventListener("DOMContentLoaded", function() {
   limparBtn.onclick = limparCarrinho;
   cart.insertBefore(limparBtn, whatsappBtn);
 });
+
+// Variável para armazenar os arquivos temporários
+let arquivosTemp = [];
+
+// Quando selecionar múltiplos arquivos
+document.getElementById('multi-files').addEventListener('change', function(e) {
+  const files = e.target.files;
+  if (!files.length) return;
+  
+  arquivosTemp = Array.from(files);
+  const container = document.getElementById('multi-produtos-container');
+  container.innerHTML = '';
+  
+  arquivosTemp.forEach((file, index) => {
+    const reader = new FileReader();
+    
+    reader.onload = function(event) {
+      const produtoForm = document.createElement('div');
+      produtoForm.className = 'multi-produto-form';
+      produtoForm.id = `produto-form-${index}`;
+      produtoForm.innerHTML = `
+        <h4>Produto ${index + 1}</h4>
+        <img src="${event.target.result}" alt="Pré-visualização" />
+        <div class="form-group">
+          <label for="produto-nome-${index}">Nome do Produto:</label>
+          <input type="text" id="produto-nome-${index}" placeholder="Nome do Produto" />
+        </div>
+        <div class="form-group">
+          <label for="produto-codigo-${index}">Código do Produto:</label>
+          <input type="text" id="produto-codigo-${index}" placeholder="Código do Produto" />
+        </div>
+        <div class="form-group">
+          <label for="produto-preco-${index}">Preço:</label>
+          <input type="text" id="produto-preco-${index}" placeholder="Preço" />
+        </div>
+      `;
+      container.appendChild(produtoForm);
+    };
+    
+    reader.readAsDataURL(file);
+  });
+});
+
+// Adicionar múltiplos produtos de uma vez
+function adicionarMultiplosProdutos() {
+  if (arquivosTemp.length === 0) {
+    alert('Selecione pelo menos uma imagem!');
+    return;
+  }
+
+  let produtosAdicionados = 0;
+  
+  arquivosTemp.forEach((file, index) => {
+    const nome = document.getElementById(`produto-nome-${index}`)?.value.trim();
+    const codigo = document.getElementById(`produto-codigo-${index}`)?.value.trim();
+    const preco = document.getElementById(`produto-preco-${index}`)?.value.trim();
+    
+    if (!nome || !codigo || !preco) {
+      console.warn(`Produto ${index + 1} não adicionado: campos incompletos`);
+      return; // Pula este produto
+    }
+    
+    const reader = new FileReader();
+    
+    reader.onload = function(e) {
+      const novoProduto = {
+        nome: nome,
+        codigo: codigo,
+        preco: preco,
+        imagem: e.target.result
+      };
+      
+      produtos.push(novoProduto);
+      produtosAdicionados++;
+      
+      // Se foi o último produto, atualiza a interface
+      if (index === arquivosTemp.length - 1) {
+        salvarDados();
+        atualizarCatalogo();
+        atualizarListaAdmin();
+        
+        if (produtosAdicionados > 0) {
+          alert(`${produtosAdicionados} produto(s) adicionado(s) com sucesso!`);
+          
+          // Limpa o formulário
+          document.getElementById('multi-files').value = '';
+          document.getElementById('multi-produtos-container').innerHTML = '';
+          arquivosTemp = [];
+        }
+      }
+    };
+    
+    reader.readAsDataURL(file);
+  });
+}

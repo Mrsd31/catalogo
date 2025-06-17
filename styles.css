@@ -301,3 +301,32 @@ button:hover, .btn:hover {
   padding-top: 10px;
   border-top: 2px solid #cc0000;
 }
+
+/* Estilos para o formulário de múltiplos produtos */
+.multi-produto-form {
+  background: white;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  border: 2px solid #cc0000;
+}
+
+.multi-produto-form h4 {
+  margin-top: 0;
+  color: #cc0000;
+}
+
+.multi-produto-form img {
+  max-width: 100px;
+  max-height: 100px;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.multi-produto-form .form-group {
+  margin-bottom: 10px;
+}
+
+.multi-produto-form .form-group label {
+  font-size: 14px;
+}

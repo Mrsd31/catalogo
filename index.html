@@ -16,6 +16,25 @@
     <a href="#" id="admin-link">Área Administrativa</a>
   </nav>
 
+  <div id="admin-page" class="container" style="display: none;">
+  <div class="admin-panel">
+  
+    
+    <h3>Adicionar Múltiplos Produtos</h3>
+    <div class="form-group">
+      <label for="multi-files">Imagens dos Produtos (Selecione várias):</label>
+      <input type="file" id="multi-files" accept="image/*" multiple />
+    </div>
+    
+    <div id="multi-produtos-container">
+      <!-- Aqui serão gerados os campos para cada imagem -->
+    </div>
+    
+    <button onclick="adicionarMultiplosProdutos()">Adicionar Todos os Produtos</button>
+  
+  </div>
+</div>
+
   <!-- Página Principal (Catálogo) -->
   <div id="catalog-page" class="container">
     <div class="catalogo">
