@@ -3,323 +3,123 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Naldocomvoce - Gerador de Catálogo</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f5f5f5;
-    }
-    header {
-      background: #cc0000;
-      color: white;
-      padding: 10px 20px;
-      text-align: center;
-      border-bottom: 5px solid #ffcc00;
-    }
-    header img {
-      max-height: 120px;
-    }
-    .formulario {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 20px;
-    }
-    .produto-form {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 10px;
-      flex-wrap: wrap;
-    }
-    .produto-form input, .produto-form select {
-      padding: 8px;
-      border: 2px solid #cc0000;
-      border-radius: 5px;
-    }
-    .catalogo {
-      padding: 20px;
-      display: flex;
-      justify-content: center;
-    }
-    .area-catalogo {
-      background: #cc0000; /* Cor padrão (pode ser alterada) */
-      border: 5px solid #ffcc00;
-      border-radius: 15px;
-      padding: 20px;
-      position: relative;
-      max-width: 1000px;
-      width: 100%;
-    }
-    .cabecalho-catalogo {
-      background: #ffcc00;
-      padding: 15px;
-      border-radius: 10px;
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    .cabecalho-catalogo img {
-      max-width: 100%;
-      max-height: 150px;
-    }
-    .titulo-catalogo {
-      background: #ffcc00;
-      padding: 15px;
-      border-radius: 10px;
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    .titulo-catalogo h1 {
-      color: #cc0000;
-      margin: 0;
-      font-size: 28px;
-    }
-    .titulo-catalogo p {
-      margin: 5px 0;
-      color: #333;
-    }
-    .titulo-catalogo span {
-      color: #cc0000;
-      font-weight: bold;
-      font-size: 18px;
-    }
-    .produtos {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 15px;
-    }
-    .produto {
-      background: #ffcc00;
-      border: 3px solid #cc0000;
-      border-radius: 10px;
-      padding: 10px;
-      text-align: center;
-    }
-    .produto img {
-      max-width: 100%;
-      height: 120px;
-      object-fit: contain;
-      background: white;
-      padding: 5px;
-      border-radius: 5px;
-    }
-    .produto h3 {
-      margin: 10px 0;
-      color: #333;
-    }
-    .preco {
-      background: white;
-      color: #cc0000;
-      font-weight: bold;
-      font-size: 1.3em;
-      padding: 5px;
-      border-radius: 5px;
-      display: inline-block;
-    }
-    button {
-      background: #ffcc00;
-      color: #cc0000;
-      border: 2px solid #cc0000;
-      padding: 10px 20px;
-      font-weight: bold;
-      border-radius: 5px;
-      cursor: pointer;
-      margin: 10px;
-      transition: all 0.3s;
-    }
-    button:hover {
-      background: #cc0000;
-      color: #ffcc00;
-    }
-    .configuracoes {
-      background: #ffcc00;
-      padding: 15px;
-      border-radius: 8px;
-      margin-bottom: 20px;
-      width: 80%;
-      max-width: 800px;
-      border: 3px solid #cc0000;
-    }
-    .configuracoes h3 {
-      margin-top: 0;
-      color: #cc0000;
-      text-align: center;
-    }
-    .color-picker {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin: 10px 0;
-    }
-    .color-picker label {
-      font-weight: bold;
-      color: #cc0000;
-    }
-    .color-picker input {
-      width: 50px;
-      height: 30px;
-      cursor: pointer;
-    }
-    .multi-file-input {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .file-input-container {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-    }
-    .file-input-container input[type="text"] {
-      flex: 1;
-    }
-  </style>
+  <title>Naldocomvoce - Catálogo de Produtos</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <header>
     <img id="header-logo" src="" alt="Naldocomvoce Logo" />
   </header>
 
-  <div class="formulario">
-    <div class="configuracoes">
-      <h3>Configurações do Catálogo</h3>
-      <div class="produto-form">
-        <input type="file" accept="image/*" id="imagem-cabecalho" />
-        <input type="text" placeholder="Título do Catálogo" id="titulo-catalogo" value="Semana de Ofertas Naldocomvocê!" />
-        <input type="text" placeholder="Período de Validade" id="periodo-catalogo" value="Válido de 14 a 21 de Junho ou enquanto durarem os estoques." />
-      </div>
-      <div class="color-picker">
-        <label for="cor-fundo">Cor do Fundo:</label>
-        <input type="color" id="cor-fundo" value="#cc0000" />
-      </div>
-    </div>
+  <nav>
+    <a href="#" id="home-link">Catálogo</a>
+    <a href="#" id="admin-link">Área Administrativa</a>
+  </nav>
 
-    <div class="multi-file-input">
-      <div class="produto-form">
-        <input type="file" accept="image/*" id="imagem-produto" multiple />
-        <input type="text" placeholder="Nome do Produto" id="nome-produto" />
-        <input type="text" placeholder="Preço" id="preco-produto" />
-        <button onclick="adicionarProduto()">Adicionar Produto</button>
+  <!-- Página Principal (Catálogo) -->
+  <div id="catalog-page" class="container">
+    <div class="catalogo">
+      <div class="area-catalogo" id="area-catalogo">
+        <div class="cabecalho-catalogo" id="cabecalho-catalogo">
+          <!-- Imagem do cabeçalho será inserida aqui -->
+        </div>
+        <div class="titulo-catalogo">
+          <h1 id="texto-titulo">Semana de Ofertas Naldocomvocê!</h1>
+          <p id="texto-periodo">Válido de 14 a 21 de Junho ou enquanto durarem os estoques.</p>
+          <span>ECONOMIA TODO DIA!</span>
+        </div>
+        <div class="produtos" id="lista-produtos">
+          <!-- Produtos serão carregados aqui -->
+        </div>
       </div>
-      <div id="multi-files-container"></div>
-    </div>
-    <button onclick="gerarImagem()">Baixar Catálogo (PNG)</button>
-    <button onclick="limparCatalogo()">Limpar Catálogo</button>
-  </div>
-
-  <div class="catalogo">
-    <div class="area-catalogo" id="area-catalogo">
-      <div class="cabecalho-catalogo" id="cabecalho-catalogo">
-        <!-- Imagem do cabeçalho será inserida aqui -->
-      </div>
-      <div class="titulo-catalogo">
-        <h1 id="texto-titulo">Semana de Ofertas Naldocomvocê!</h1>
-        <p id="texto-periodo">Válido de 14 a 21 de Junho ou enquanto durarem os estoques.</p>
-        <span>ECONOMIA TODO DIA!</span>
-      </div>
-      <div class="produtos" id="lista-produtos"></div>
     </div>
   </div>
 
-  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-  <script>
-    // Elementos da interface
-    const listaProdutos = document.getElementById("lista-produtos");
-    const cabecalhoCatalogo = document.getElementById("cabecalho-catalogo");
-    const textoTitulo = document.getElementById("texto-titulo");
-    const textoPeriodo = document.getElementById("texto-periodo");
-    const areaCatalogo = document.getElementById("area-catalogo");
-    const corFundoInput = document.getElementById("cor-fundo");
-    const multiFilesContainer = document.getElementById("multi-files-container");
+  <!-- Página de Login -->
+  <div id="login-page" class="container" style="display: none;">
+    <div class="login-container">
+      <h2>Área Administrativa</h2>
+      <div class="form-group">
+        <label for="login-email">E-mail:</label>
+        <input type="email" id="login-email" placeholder="Digite seu e-mail" />
+      </div>
+      <div class="form-group">
+        <label for="login-senha">Senha:</label>
+        <input type="password" id="login-senha" placeholder="Digite sua senha" />
+      </div>
+      <button onclick="fazerLogin()">Entrar</button>
+    </div>
+  </div>
 
-    // Atualiza a cor de fundo do catálogo
-    corFundoInput.addEventListener("input", function() {
-      areaCatalogo.style.background = corFundoInput.value;
-    });
-
-    // Configura o cabeçalho do catálogo
-    document.getElementById('imagem-cabecalho').addEventListener('change', function(e) {
-      const file = e.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function(event) {
-          cabecalhoCatalogo.innerHTML = `<img src="${event.target.result}" alt="Cabeçalho do Catálogo" />`;
-        };
-        reader.readAsDataURL(file);
-      }
-    });
-
-    // Atualiza textos do catálogo
-    document.getElementById('titulo-catalogo').addEventListener('input', function(e) {
-      textoTitulo.textContent = e.target.value;
-    });
-
-    document.getElementById('periodo-catalogo').addEventListener('input', function(e) {
-      textoPeriodo.textContent = e.target.value;
-    });
-
-    // Adiciona produtos ao catálogo
-    function adicionarProduto() {
-      const fileInput = document.getElementById("imagem-produto");
-      const nome = document.getElementById("nome-produto").value.trim();
-      const preco = document.getElementById("preco-produto").value.trim();
-
-      if (!fileInput.files.length || !nome || !preco) {
-        alert("Preencha todos os campos do produto!");
-        return;
-      }
-
-      // Processa múltiplas imagens
-      const files = Array.from(fileInput.files);
+  <!-- Painel Administrativo -->
+  <div id="admin-page" class="container" style="display: none;">
+    <div class="admin-panel">
+      <h2>Painel Administrativo</h2>
+      <button onclick="logout()">Sair</button>
       
-      files.forEach((file, index) => {
-        const reader = new FileReader();
-        reader.onload = function (e) {
-          const produto = document.createElement("div");
-          produto.className = "produto";
-          
-          // Se houver apenas uma imagem ou for a primeira, usa o nome e preço originais
-          // Para imagens adicionais, adiciona um número ao nome
-          const produtoNome = files.length === 1 ? nome : `${nome} ${index + 1}`;
-          
-          produto.innerHTML = `
-            <img src="${e.target.result}" alt="${produtoNome}" />
-            <h3>${produtoNome}</h3>
-            <div class="preco">R$ ${preco}</div>
-          `;
-          listaProdutos.appendChild(produto);
-        };
-        reader.readAsDataURL(file);
-      });
+      <h3>Configurações do Catálogo</h3>
+      <div class="form-group">
+        <label for="admin-imagem-cabecalho">Imagem do Cabeçalho:</label>
+        <input type="file" id="admin-imagem-cabecalho" accept="image/*" />
+      </div>
+      
+      <div class="form-group">
+        <label for="admin-titulo-catalogo">Título do Catálogo:</label>
+        <input type="text" id="admin-titulo-catalogo" placeholder="Título do Catálogo" value="Semana de Ofertas Naldocomvocê!" />
+      </div>
+      
+      <div class="form-group">
+        <label for="admin-periodo-catalogo">Período de Validade:</label>
+        <input type="text" id="admin-periodo-catalogo" placeholder="Período de Validade" value="Válido de 14 a 21 de Junho ou enquanto durarem os estoques." />
+      </div>
+      
+      <button onclick="salvarConfiguracoes()">Salvar Configurações</button>
+      
+      <h3>Adicionar Novo Produto</h3>
+      <div class="form-group">
+        <label for="admin-imagem-produto">Imagem do Produto:</label>
+        <input type="file" id="admin-imagem-produto" accept="image/*" />
+      </div>
+      
+      <div class="form-group">
+        <label for="admin-nome-produto">Nome do Produto:</label>
+        <input type="text" id="admin-nome-produto" placeholder="Nome do Produto" />
+      </div>
+      
+      <div class="form-group">
+        <label for="admin-codigo-produto">Código do Produto:</label>
+        <input type="text" id="admin-codigo-produto" placeholder="Código do Produto" />
+      </div>
+      
+      <div class="form-group">
+        <label for="admin-preco-produto">Preço:</label>
+        <input type="text" id="admin-preco-produto" placeholder="Preço" />
+      </div>
+      
+      <button onclick="adicionarProdutoAdmin()">Adicionar Produto</button>
+      
+      <h3>Produtos Cadastrados</h3>
+      <div class="produto-list" id="lista-produtos-admin">
+        <!-- Lista de produtos no admin -->
+      </div>
+    </div>
+  </div>
 
-      // Limpa campos
-      fileInput.value = "";
-      document.getElementById("nome-produto").value = "";
-      document.getElementById("preco-produto").value = "";
-    }
+  <!-- Carrinho de Compras -->
+  <div class="cart" id="cart">
+    <h3>Seu Pedido</h3>
+    <div class="cart-items" id="cart-items">
+      <!-- Itens do carrinho serão adicionados aqui -->
+    </div>
+    <div class="cart-total" id="cart-total">
+      Total: R$ 0,00
+    </div>
+    <a href="#" class="whatsapp-btn" id="whatsapp-btn" target="_blank">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+      Enviar Pedido
+    </a>
+  </div>
 
-    // Gera a imagem do catálogo
-    function gerarImagem() {
-      html2canvas(areaCatalogo, {
-        scale: 2,
-        backgroundColor: corFundoInput.value,
-        useCORS: true,
-      }).then(canvas => {
-        const link = document.createElement('a');
-        link.download = 'catalogo-naldo.png';
-        link.href = canvas.toDataURL('image/png');
-        link.click();
-      }).catch(err => {
-        console.error("Erro ao gerar catálogo:", err);
-        alert("Erro ao baixar. Tente novamente!");
-      });
-    }
-
-    // Limpa todo o catálogo
-    function limparCatalogo() {
-      listaProdutos.innerHTML = '';
-    }
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
